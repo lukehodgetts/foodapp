@@ -1,5 +1,11 @@
-import React from "react";
 import useAxios from "axios-hooks";
+
+import { dark, light } from "./themes";
+import { Container, MainContent, Footer } from "./app.styles";
+import { ThemeProvider } from "styled-components";
+
+import Header from "./components/Header";
+import { useState } from "react";
 
 function App() {
   const [{ data, loading, error }, refetch] = useAxios(
@@ -17,13 +23,39 @@ function App() {
     { manual: true }
   );
 
-  console.log(data);
+  const [theme, setTheme] = useState<"light"|"dark">("light")
 
-  
   if (loading) return <h1>...</h1>;
   if (error) return <h1>error</h1>;
 
-  return <div>123</div>;
+  return (
+    <ThemeProvider theme={(theme === "light") ? light : dark}>
+      <Container>
+        <Header onThemeToggle={(theme)=>setTheme(theme)} selectedTheme={theme}/>
+        <MainContent>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+          <h1>placeholder</h1>
+        </MainContent>
+        <Footer gridArea="footer">Footer</Footer>
+      </Container>
+    </ThemeProvider>
+  );
 }
 
 export default App;
