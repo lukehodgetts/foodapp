@@ -11,7 +11,7 @@ interface GridProps {
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 5% 90% 5%;
-  grid-template-rows: 50px auto 50px;
+  grid-template-rows: 80px auto 30px;
   grid-template-areas:
     "header header header"
     ". main ."

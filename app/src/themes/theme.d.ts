@@ -6,6 +6,11 @@ declare module "styled-components" {
       background: string;
       header: string;
       footer: string;
+      headerText: string;
+      footerText: string;
+      bodyText: string;
+      searchInput: string;
+      searchText: string;
     };
   }
 }
