@@ -1,8 +1,13 @@
 import useAxios from "axios-hooks";
-import { useState } from "react";
 
 import { dark, light } from "./themes";
-import { Container, MainContent } from "./app.styles";
+import {
+  Container,
+  MainContent,
+  Loading,
+  FlexBox,
+  Watermark,
+} from "./app.styles";
 import { ThemeProvider } from "styled-components";
 
 import Header from "./components/Header";
@@ -19,6 +24,7 @@ interface GetRecipeResults {
         calories: number;
         ingredients: {}[];
         url: string;
+        yield: number;
       };
     }
   ];
@@ -29,8 +35,8 @@ function App() {
     {
       url: "https://edamam-recipe-search.p.rapidapi.com/search",
       params: {
-        q: "chocolate",
-        to: 18,
+        q: "",
+        to: 12,
       },
       headers: {
         "x-rapidapi-key": process.env.REACT_APP_API_KEY,
@@ -46,13 +52,10 @@ function App() {
     refetch({
       params: {
         q: text,
-        to: 18,
+        to: 12,
       },
     });
   };
-
-  if (loading) return <h1>...</h1>;
-  if (error) return <h1>error</h1>;
 
   return (
     <ThemeProvider theme={theme === "light" ? light : dark}>
@@ -60,15 +63,33 @@ function App() {
         <Header
           onThemeToggle={(theme) => changeTheme(theme)}
           selectedTheme={theme}
-          placeholder="deez nuts"
+          placeholder="search"
           onSearch={onSearch}
         />
-        <MainContent>
-          {data &&
-            data.hits.map((entry) => (
-              <Card name={entry.recipe.label} image={entry.recipe.image} />
+        {error && <h1>error</h1>}
+        {loading && (
+          <FlexBox>
+            <Loading />
+          </FlexBox>
+        )}
+        {!data && !loading && (
+          <FlexBox>
+            <Watermark>use search bar above</Watermark>
+          </FlexBox>
+        )}
+        {data && (
+          <MainContent>
+            {data.hits.map((entry) => (
+              <Card
+                name={entry.recipe.label}
+                image={entry.recipe.image}
+                calories={Math.round(entry.recipe.calories / entry.recipe.yield)}
+                ingredients={entry.recipe.ingredients.length}
+                url={entry.recipe.url}
+              />
             ))}
-        </MainContent>
+          </MainContent>
+        )}
         <Footer />
       </Container>
     </ThemeProvider>

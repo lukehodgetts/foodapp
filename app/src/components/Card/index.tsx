@@ -1,4 +1,12 @@
-import { Body, Title, Image, Label, Details } from "./index.styles";
+import {
+  Body,
+  Title,
+  Image,
+  Label,
+  Details,
+  Link,
+  LinkContainer,
+} from "./index.styles";
 
 interface Props {
   name: string;
@@ -14,8 +22,13 @@ const Card: React.FC<Props> = ({ name, image, url, calories, ingredients }) => {
       <Image src={image} />
       <Details>
         <Title>{name}</Title>
-        <Label>{calories}</Label>
-        <Label>{ingredients}</Label>
+        <Label>{calories} calories per serving</Label>
+        <Label>number of ingredients: {ingredients}</Label>
+        <LinkContainer>
+          <Link href={url} target="_blank">
+            view recipe
+          </Link>
+        </LinkContainer>
       </Details>
     </Body>
   );

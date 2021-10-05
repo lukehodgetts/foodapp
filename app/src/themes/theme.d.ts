@@ -11,6 +11,10 @@ declare module "styled-components" {
       bodyText: string;
       searchInput: string;
       searchText: string;
+      card: string;
+      cardBorder: string;
+      cardHoverShadow: string;
+      cardHoverColour: string;
     };
   }
 }
