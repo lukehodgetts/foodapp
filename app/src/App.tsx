@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import useAxios from "axios-hooks";
 
 import { dark, light } from "./themes";
@@ -7,6 +8,8 @@ import {
   Loading,
   FlexBox,
   Watermark,
+  NextButton,
+  PrevButton,
 } from "./app.styles";
 import { ThemeProvider } from "styled-components";
 
@@ -46,15 +49,40 @@ function App() {
     { manual: true }
   );
 
+  const [searchText, setSearchText] = useState("");
+  const [resultsPage, setResultsPage] = useState(1);
+
   const { theme, changeTheme } = useTheme();
 
-  const onSearch = (text: string) => {
+  useEffect(() => {
+    if (searchText !== "") {
+      refetch({
+        params: {
+          q: searchText,
+          to: 12 * resultsPage,
+          from: 12 * (resultsPage - 1),
+        },
+      });
+      console.log(resultsPage);
+    }
+  }, [resultsPage]);
+
+  const onSearch = () => {
+    setResultsPage(1);
     refetch({
       params: {
-        q: text,
+        q: searchText,
         to: 12,
       },
     });
+  };
+
+  const onNextPage = () => {
+    setResultsPage(resultsPage + 1);
+  };
+
+  const onPrevPage = () => {
+    setResultsPage(resultsPage - 1);
   };
 
   return (
@@ -65,6 +93,8 @@ function App() {
           selectedTheme={theme}
           placeholder="search"
           onSearch={onSearch}
+          onSearchChange={(text) => setSearchText(text)}
+          searchText={searchText}
         />
         {error && <h1>error</h1>}
         {loading && (
@@ -77,18 +107,25 @@ function App() {
             <Watermark>use search bar above</Watermark>
           </FlexBox>
         )}
-        {data && (
-          <MainContent>
-            {data.hits.map((entry) => (
-              <Card
-                name={entry.recipe.label}
-                image={entry.recipe.image}
-                calories={Math.round(entry.recipe.calories / entry.recipe.yield)}
-                ingredients={entry.recipe.ingredients.length}
-                url={entry.recipe.url}
-              />
-            ))}
-          </MainContent>
+        {data && !loading && (
+          <>
+            <PrevButton onClick={onPrevPage}>back</PrevButton>
+            <MainContent>
+              {data.hits.map((entry) => (
+                <Card
+                  name={entry.recipe.label}
+                  image={entry.recipe.image}
+                  calories={Math.round(
+                    entry.recipe.calories / entry.recipe.yield
+                  )}
+                  ingredients={entry.recipe.ingredients.length}
+                  noOfServings={entry.recipe.yield}
+                  url={entry.recipe.url}
+                />
+              ))}
+            </MainContent>
+            <NextButton onClick={onNextPage}>next</NextButton>
+          </>
         )}
         <Footer />
       </Container>

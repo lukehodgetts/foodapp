@@ -14,7 +14,7 @@ export const Container = styled.div`
   grid-template-rows: 80px auto 30px;
   grid-template-areas:
     "header header header"
-    ". main ."
+    "prev main next"
     "footer footer footer";
 
   height: 100%;
@@ -109,4 +109,12 @@ export const Loading = styled.div`
 
 export const Watermark = styled.h1`
   color: #757575;
+`;
+
+export const NextButton = styled.div`
+  grid-area: next;
+`;
+
+export const PrevButton = styled.div`
+  grid-area: prev;
 `;

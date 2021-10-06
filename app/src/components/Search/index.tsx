@@ -1,17 +1,17 @@
-import { useState } from "react";
 import { Textbox } from "./index.styles";
 
 interface Props {
   placeholder: string;
-  onEnterPress?: (text:string) => void;
+  onEnterPress?: () => void;
+  inputText: string;
+  onChange: (text:string)=>void;
 }
 
-const Search: React.FC<Props> = ({ placeholder, onEnterPress }) => {
-  const [inputText, setinputText] = useState("");
+const Search: React.FC<Props> = ({ placeholder, onEnterPress, inputText, onChange }) => {
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && onEnterPress && inputText !== "") {
-      onEnterPress(inputText);
+      onEnterPress();
     }
   };
 
@@ -20,7 +20,7 @@ const Search: React.FC<Props> = ({ placeholder, onEnterPress }) => {
       placeholder={placeholder}
       onKeyPress={onKeyPress}
       value={inputText}
-      onChange={(e) => setinputText(e.target.value)}
+      onChange={(e)=>onChange(e.target.value)}
     />
   );
 };

@@ -11,7 +11,11 @@ export const Body = styled.div`
   :hover {
     box-shadow: ${({ theme }) => theme.colours.cardHoverShadow};
     background-color: ${({ theme }) => theme.colours.cardHoverColour};
+    cursor: pointer;
   }
+
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Details = styled.div`
@@ -21,7 +25,8 @@ export const Details = styled.div`
     "stat"
     "stat"
     "url";
-  padding: 0px 10px;
+  padding: 0px 5px 5px 5px ;
+  height: 100%;
 `;
 
 export const Title = styled.h3`
@@ -31,9 +36,7 @@ export const Title = styled.h3`
   border-bottom: 2px solid ${({ theme }) => theme.colours.bodyText};
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  white-space: nowrap;
 `;
 
 export const Image = styled.img`
@@ -43,6 +46,10 @@ export const Image = styled.img`
 
 export const Label = styled.label`
   color: ${({ theme }) => theme.colours.bodyText};
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const LinkContainer = styled.div`
