@@ -15,6 +15,8 @@ declare module "styled-components" {
       cardBorder: string;
       cardHoverShadow: string;
       cardHoverColour: string;
+      prevNextButtons: string;
+      prevNextButtonsHoverColour: string;
     };
   }
 }

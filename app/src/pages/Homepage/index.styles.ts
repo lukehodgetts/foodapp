@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface GridProps {
   gridRowStart?: any;
@@ -49,8 +50,12 @@ export const Footer = styled(Grid)`
   background-color: ${({ theme }) => theme.colours.footer};
 `;
 
-export const FlexBox = styled.div`
-  grid-area: main;
+interface GridAreaProps {
+  gridArea?: string;
+}
+
+export const FlexBox = styled.div<GridAreaProps>`
+  grid-area: ${({ gridArea }) => gridArea};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -111,10 +116,24 @@ export const Watermark = styled.h1`
   color: #757575;
 `;
 
-export const NextButton = styled.div`
+export const NextButton = styled(FontAwesomeIcon)`
   grid-area: next;
+  color: ${({ theme }) => theme.colours.prevNextButtons};
+  transition: all 0.2s;
+
+  :hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.colours.prevNextButtonsHoverColour};
+  }
 `;
 
-export const PrevButton = styled.div`
+export const PrevButton = styled(FontAwesomeIcon)`
   grid-area: prev;
+  color: ${({ theme }) => theme.colours.prevNextButtons};
+  transition: all 0.2s;
+
+  :hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.colours.prevNextButtonsHoverColour};
+  }
 `;

@@ -15,12 +15,19 @@ export const ThemeSwitch = styled.div`
   align-items: center;
 `;
 
-export const Title = styled.h1`
+export const Title = styled.div`
   grid-area: title;
   display: flex;
   color: ${({ theme }) => theme.colours.headerText};
   margin: 0px 0px 0px 15px;
   align-items: center;
+  width: auto;
+
+  h1 {
+    :hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 export const SearchContainer = styled.div`

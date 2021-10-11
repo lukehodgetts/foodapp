@@ -1,11 +1,26 @@
-import { Container, Signature } from "./index.styles"
+import {
+  Container,
+  Signature,
+  PageNumberContainer,
+  PageNumber,
+} from "./index.styles";
 
-const Footer = () => {
-    return (
-        <Container>
-            <Signature>made by buk</Signature>
-        </Container>
-    )
+interface Props {
+  pageNumber: number;
+  hasData: boolean;
 }
 
-export default Footer
+const Footer: React.FC<Props> = ({ pageNumber, hasData }) => {
+  return (
+    <Container>
+      {hasData && (
+        <PageNumberContainer>
+          <PageNumber>page {pageNumber}</PageNumber>
+        </PageNumberContainer>
+      )}
+      <Signature>made by buk</Signature>
+    </Container>
+  );
+};
+
+export default Footer;

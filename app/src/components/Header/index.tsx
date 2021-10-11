@@ -7,17 +7,33 @@ interface Props {
   onThemeToggle: (theme: "light" | "dark") => void;
   selectedTheme: "light" | "dark";
   placeholder: string;
-  onSearch: ()=>void;
+  onSearch: () => void;
   searchText: string;
-  onSearchChange: (text:string)=>void;
+  onSearchChange: (text: string) => void;
+  onTitleClick?: () => void;
 }
 
-const Header: React.FC<Props> = ({ onThemeToggle, selectedTheme, placeholder, onSearch, searchText, onSearchChange}) => {
+const Header: React.FC<Props> = ({
+  onThemeToggle,
+  selectedTheme,
+  placeholder,
+  onSearch,
+  searchText,
+  onSearchChange,
+  onTitleClick,
+}) => {
   return (
     <Container>
-      <Title>foodapp</Title>
+      <Title>
+        <h1 onClick={onTitleClick}>foodapp</h1>
+      </Title>
       <SearchContainer>
-        <Search placeholder={placeholder} onEnterPress={onSearch} inputText={searchText} onChange={onSearchChange}/>
+        <Search
+          placeholder={placeholder}
+          onEnterPress={onSearch}
+          inputText={searchText}
+          onChange={onSearchChange}
+        />
       </SearchContainer>
       <ThemeSwitch>
         <Switch

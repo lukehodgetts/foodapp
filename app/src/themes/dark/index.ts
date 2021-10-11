@@ -1,5 +1,5 @@
 import { DefaultTheme } from "styled-components";
-import { lighten } from "polished";
+import { lighten, darken } from "polished";
 
 const theme: DefaultTheme = {
   colours: {
@@ -14,7 +14,9 @@ const theme: DefaultTheme = {
     card: "#202020",
     cardBorder: "#121212",
     cardHoverShadow: "inherit",
-    cardHoverColour: lighten(0.05, "#202020")
+    cardHoverColour: lighten(0.1, "#202020"),
+    prevNextButtons: "#ffffff",
+    prevNextButtonsHoverColour: darken(0.5,"#ffffff")
   },
 };
 
