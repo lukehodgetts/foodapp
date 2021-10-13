@@ -1,0 +1,24 @@
+
+###
+
+POST http://localhost:8080/recipes
+Content-Type: application/json
+
+{
+    "name": "sugar cake",
+    "calories": 800,
+    "ingredients": ["sugar", "flour", "cake"],
+    "servings": 8
+}
+
+###
+
+GET http://localhost:8080/recipes
+Content-Type: application/json
+
+###
+
+DELETE  http://localhost:8080/recipes/6165af95d2078203cf498a36
+Content-Type: application/json
+
+###

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { darken } from "@material-ui/core";
 
 export const Textbox = styled.input`
   background-color: ${({ theme }) => theme.colours.searchInput};
@@ -10,4 +12,21 @@ export const Textbox = styled.input`
   border-radius: 5px;
   outline: none;
   font-size: 24px;
+`;
+
+export const SearchContainer = styled.div`
+  grid-area: search;
+  display: flex;
+  align-items: center;
+`;
+
+export const AddButton = styled(FontAwesomeIcon)`
+  margin-left: -30px;
+  color: #757575;
+  transition: all 0.1s;
+
+  :hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.colours.addRecipeButtonHoverColour};
+  }
 `;

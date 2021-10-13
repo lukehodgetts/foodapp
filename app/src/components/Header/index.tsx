@@ -1,6 +1,6 @@
 import { Switch } from "@material-ui/core";
 
-import { Container, ThemeSwitch, Title, SearchContainer } from "./index.styles";
+import { Container, ThemeSwitch, Title } from "./index.styles";
 import Search from "../Search";
 
 interface Props {
@@ -27,14 +27,12 @@ const Header: React.FC<Props> = ({
       <Title>
         <h1 onClick={onTitleClick}>foodapp</h1>
       </Title>
-      <SearchContainer>
-        <Search
-          placeholder={placeholder}
-          onEnterPress={onSearch}
-          inputText={searchText}
-          onChange={onSearchChange}
-        />
-      </SearchContainer>
+      <Search
+        placeholder={placeholder}
+        onEnterPress={onSearch}
+        inputText={searchText}
+        onChange={onSearchChange}
+      />
       <ThemeSwitch>
         <Switch
           onChange={(e, checked) => onThemeToggle(checked ? "light" : "dark")}

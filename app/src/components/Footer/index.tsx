@@ -6,7 +6,7 @@ import {
 } from "./index.styles";
 
 interface Props {
-  pageNumber: number;
+  pageNumber?: number;
   hasData: boolean;
 }
 

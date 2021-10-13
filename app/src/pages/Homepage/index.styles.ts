@@ -1,13 +1,6 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-interface GridProps {
-  gridRowStart?: any;
-  gridRowEnd?: any;
-  gridColumnStart?: any;
-  gridColumnEnd?: any;
-  gridArea?: any;
-}
+import { Grid } from "../../app.styles";
 
 export const Container = styled.div`
   display: grid;
@@ -22,32 +15,10 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.colours.background};
 `;
 
-export const Grid = styled.div<GridProps>`
-  grid-row-start: ${({ gridRowStart }) => gridRowStart};
-  grid-row-end: ${({ gridRowEnd }) => gridRowEnd};
-  grid-column-start: ${({ gridColumnStart }) => gridColumnStart};
-  grid-column-end: ${({ gridColumnEnd }) => gridColumnEnd};
-  grid-area: ${({ gridArea }) => gridArea};
-`;
-
 export const MainContent = styled(Grid)`
   display: grid;
   grid-template-columns: repeat(6, 16.6%);
   grid-area: main;
-`;
-
-export const Header = styled(Grid)`
-  display: flex;
-  justify-content: center;
-
-  background-color: ${({ theme }) => theme.colours.header};
-`;
-
-export const Footer = styled(Grid)`
-  display: flex;
-  justify-content: center;
-
-  background-color: ${({ theme }) => theme.colours.footer};
 `;
 
 interface GridAreaProps {

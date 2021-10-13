@@ -17,6 +17,7 @@ declare module "styled-components" {
       cardHoverColour: string;
       prevNextButtons: string;
       prevNextButtonsHoverColour: string;
+      addRecipeButtonHoverColour: string;
     };
   }
 }

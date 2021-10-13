@@ -29,9 +29,3 @@ export const Title = styled.div`
     }
   }
 `;
-
-export const SearchContainer = styled.div`
-  grid-area: search;
-  display: flex;
-  align-items: center;
-`;

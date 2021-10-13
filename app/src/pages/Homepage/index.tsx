@@ -5,7 +5,6 @@ import {
   faArrowAltCircleLeft,
   faArrowAltCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { dark, light } from "../../themes";
 import {
   Container,
   MainContent,
@@ -15,12 +14,11 @@ import {
   NextButton,
   PrevButton,
 } from "./index.styles";
-import { ThemeProvider } from "styled-components";
 
 import Header from "../../components/Header";
 import Card from "../../components/Card";
 import Footer from "../../components/Footer";
-import useTheme from "../../hooks/useTheme";
+import { Theme } from "../../hooks/useTheme";
 
 interface GetRecipeResults {
   hits: [
@@ -37,7 +35,12 @@ interface GetRecipeResults {
   ];
 }
 
-function App() {
+interface Props {
+  selectedTheme: Theme;
+  changeTheme: (theme: Theme) => void;
+}
+
+const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
   const [{ data, loading, error }, refetch] = useAxios<GetRecipeResults>(
     {
       url: "https://edamam-recipe-search.p.rapidapi.com/search",
@@ -55,8 +58,6 @@ function App() {
 
   const [searchText, setSearchText] = useState("");
   const [resultsPage, setResultsPage] = useState(1);
-
-  const { theme, changeTheme } = useTheme();
 
   useEffect(() => {
     if (searchText !== "") {
@@ -94,68 +95,66 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={theme === "light" ? light : dark}>
-      <Container>
-        <Header
-          onThemeToggle={(theme) => changeTheme(theme)}
-          selectedTheme={theme}
-          placeholder="search"
-          onSearch={onSearch}
-          onSearchChange={(text) => setSearchText(text)}
-          searchText={searchText}
-          onTitleClick={onTitleClick}
-        />
-        {error && <h1>error</h1>}
-        {loading && (
-          <FlexBox gridArea="main">
-            <Loading />
+    <Container>
+      <Header
+        onThemeToggle={(theme) => changeTheme(theme)}
+        selectedTheme={selectedTheme}
+        placeholder="search"
+        onSearch={onSearch}
+        onSearchChange={(text) => setSearchText(text)}
+        searchText={searchText}
+        onTitleClick={onTitleClick}
+      />
+      {error && <h1>error</h1>}
+      {loading && (
+        <FlexBox gridArea="main">
+          <Loading />
+        </FlexBox>
+      )}
+      {!data && !loading && (
+        <FlexBox gridArea="main">
+          <Watermark>use search bar above</Watermark>
+        </FlexBox>
+      )}
+      <>
+        <FlexBox gridArea="prev">
+          {resultsPage !== 1 && (
+            <PrevButton
+              icon={faArrowAltCircleLeft}
+              onClick={onPrevPage}
+              size="4x"
+            ></PrevButton>
+          )}
+        </FlexBox>
+        {data && !loading && (
+          <MainContent>
+            {data.hits.map((entry) => (
+              <Card
+                name={entry.recipe.label}
+                image={entry.recipe.image}
+                calories={Math.round(
+                  entry.recipe.calories / entry.recipe.yield
+                )}
+                ingredients={entry.recipe.ingredients.length}
+                serves={entry.recipe.yield}
+                url={entry.recipe.url}
+              />
+            ))}
+          </MainContent>
+        )}
+        {data && (
+          <FlexBox gridArea="next">
+            <NextButton
+              icon={faArrowAltCircleRight}
+              onClick={onNextPage}
+              size="4x"
+            ></NextButton>
           </FlexBox>
         )}
-        {!data && !loading && (
-          <FlexBox gridArea="main">
-            <Watermark>use search bar above</Watermark>
-          </FlexBox>
-        )}
-        <>
-          <FlexBox gridArea="prev">
-            {resultsPage !== 1 && (
-              <PrevButton
-                icon={faArrowAltCircleLeft}
-                onClick={onPrevPage}
-                size="4x"
-              ></PrevButton>
-            )}
-          </FlexBox>
-          {data && !loading && (
-            <MainContent>
-              {data.hits.map((entry) => (
-                <Card
-                  name={entry.recipe.label}
-                  image={entry.recipe.image}
-                  calories={Math.round(
-                    entry.recipe.calories / entry.recipe.yield
-                  )}
-                  ingredients={entry.recipe.ingredients.length}
-                  noOfServings={entry.recipe.yield}
-                  url={entry.recipe.url}
-                />
-              ))}
-            </MainContent>
-          )}
-          {data && (
-            <FlexBox gridArea="next">
-              <NextButton
-                icon={faArrowAltCircleRight}
-                onClick={onNextPage}
-                size="4x"
-              ></NextButton>
-            </FlexBox>
-          )}
-        </>
-        <Footer pageNumber={resultsPage} hasData={!!data} />
-      </Container>
-    </ThemeProvider>
+      </>
+      <Footer pageNumber={resultsPage} hasData={!!data} />
+    </Container>
   );
-}
+};
 
-export default App;
+export default Homepage;
