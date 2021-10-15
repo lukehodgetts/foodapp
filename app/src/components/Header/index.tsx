@@ -1,42 +1,63 @@
 import { Switch } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
-import { Container, ThemeSwitch, Title } from "./index.styles";
+import { Container, ThemeSwitch, Title, TitleContainer } from "./index.styles";
 import Search from "../Search";
 
-interface Props {
+type BaseProps = {
   onThemeToggle: (theme: "light" | "dark") => void;
   selectedTheme: "light" | "dark";
-  placeholder: string;
-  onSearch: () => void;
+  onTitleClick?: () => void;
+  additionalTitle?: string;
+};
+
+type HiddenProps = BaseProps & {
+  hidden: true;
+};
+
+type VisibleProps = BaseProps & {
+  hidden: false;
+  onSearch?: () => void;
   searchText: string;
   onSearchChange: (text: string) => void;
-  onTitleClick?: () => void;
-}
+  onAddButtonPress: () => void;
+};
 
-const Header: React.FC<Props> = ({
-  onThemeToggle,
-  selectedTheme,
-  placeholder,
-  onSearch,
-  searchText,
-  onSearchChange,
-  onTitleClick,
-}) => {
+type Props = HiddenProps | VisibleProps;
+
+const Header: React.FC<Props> = (props) => {
+  let history = useHistory();
+  const pathArray = history.location.pathname
+    .slice(1)
+    .split("/")
+    .filter((page) => !!page);
   return (
     <Container>
-      <Title>
-        <h1 onClick={onTitleClick}>foodapp</h1>
-      </Title>
-      <Search
-        placeholder={placeholder}
-        onEnterPress={onSearch}
-        inputText={searchText}
-        onChange={onSearchChange}
-      />
+      <TitleContainer>
+        <Title onClick={props.onTitleClick}>foodapp</Title>
+        {pathArray.map((page, i) => {
+          const onClick = () =>
+            i === pathArray.length - 1
+              ? history.go(0)
+              : history.push(`/${page}`);
+          return <Title onClick={onClick}>/{page}</Title>;
+        })}
+      </TitleContainer>
+      {!props.hidden && (
+        <Search
+          placeholder="search"
+          onEnterPress={props.onSearch}
+          inputText={props.searchText}
+          onChange={props.onSearchChange}
+          onAddButtonPress={props.onAddButtonPress}
+        />
+      )}
       <ThemeSwitch>
         <Switch
-          onChange={(e, checked) => onThemeToggle(checked ? "light" : "dark")}
-          checked={selectedTheme === "light"}
+          onChange={(e, checked) =>
+            props.onThemeToggle(checked ? "light" : "dark")
+          }
+          checked={props.selectedTheme === "light"}
         />
       </ThemeSwitch>
     </Container>

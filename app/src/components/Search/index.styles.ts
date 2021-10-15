@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { darken } from "@material-ui/core";
 
 export const Textbox = styled.input`
   background-color: ${({ theme }) => theme.colours.searchInput};

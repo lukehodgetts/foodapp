@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import useAxios from "axios-hooks";
 
 import {
   faArrowAltCircleLeft,
   faArrowAltCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { Container } from "../../app.styles";
 import {
-  Container,
   MainContent,
   Loading,
   FlexBox,
@@ -72,6 +73,8 @@ const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
     }
   }, [resultsPage]);
 
+  let history = useHistory();
+
   const onSearch = () => {
     setResultsPage(1);
     refetch({
@@ -99,11 +102,12 @@ const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
       <Header
         onThemeToggle={(theme) => changeTheme(theme)}
         selectedTheme={selectedTheme}
-        placeholder="search"
         onSearch={onSearch}
         onSearchChange={(text) => setSearchText(text)}
         searchText={searchText}
         onTitleClick={onTitleClick}
+        onAddButtonPress={() => history.push("/addrecipe")}
+        hidden={false}
       />
       {error && <h1>error</h1>}
       {loading && (

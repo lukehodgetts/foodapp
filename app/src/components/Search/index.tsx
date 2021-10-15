@@ -6,6 +6,7 @@ interface Props {
   onEnterPress?: () => void;
   inputText: string;
   onChange: (text: string) => void;
+  onAddButtonPress: () => void;
 }
 
 const Search: React.FC<Props> = ({
@@ -13,6 +14,7 @@ const Search: React.FC<Props> = ({
   onEnterPress,
   inputText,
   onChange,
+  onAddButtonPress,
 }) => {
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && onEnterPress && inputText !== "") {
@@ -28,7 +30,7 @@ const Search: React.FC<Props> = ({
         value={inputText}
         onChange={(e) => onChange(e.target.value)}
       />
-      <AddButton icon={faEdit} />
+      <AddButton icon={faEdit} onClick={onAddButtonPress} />
     </SearchContainer>
   );
 };
