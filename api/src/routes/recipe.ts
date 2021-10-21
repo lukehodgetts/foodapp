@@ -17,13 +17,14 @@ router.get("/", async (req, res) => {
 
 //create one
 router.post("/", async (req, res) => {
-  const { id, name, calories, ingredients, servings } = req.body;
+  const { id, name, calories, ingredients, servings, image } = req.body;
 
   const recipe = new Recipe({
     name,
     calories,
-    ingredients,
     servings,
+    ingredients,
+    image,
   });
 
   await recipe.save();

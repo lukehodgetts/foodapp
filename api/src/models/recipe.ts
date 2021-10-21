@@ -6,6 +6,7 @@ interface Recipe extends Document {
   calories: number;
   ingredients: string[];
   servings: number;
+  image: string;
 }
 
 const recipeSchema = new mongoose.Schema({
@@ -23,6 +24,10 @@ const recipeSchema = new mongoose.Schema({
   },
   servings: {
     type: Number,
+    required: true,
+  },
+  image: {
+    type: String,
     required: true,
   },
 });

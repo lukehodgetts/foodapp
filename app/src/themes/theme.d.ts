@@ -9,8 +9,9 @@ declare module "styled-components" {
       headerText: string;
       footerText: string;
       bodyText: string;
-      searchInput: string;
-      searchText: string;
+      input: string;
+      inputText: string;
+      inputBorder: string;
       card: string;
       cardBorder: string;
       cardHoverShadow: string;
@@ -18,6 +19,12 @@ declare module "styled-components" {
       prevNextButtons: string;
       prevNextButtonsHoverColour: string;
       addRecipeButtonHoverColour: string;
+      addIngredientButtonHoverColourGreen: string;
+      addIngredientButtonHoverColourRed: string;
+      saveButton: string;
+      saveButtonHover: string;
+      saveButtonClick: string;
+      saveButtonText: string;
     };
   }
 }

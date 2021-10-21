@@ -9,8 +9,9 @@ const theme: DefaultTheme = {
     headerText: "#ffffff",
     footerText: "#ffffff",
     bodyText: "#00000f",
-    searchInput: "#ffffff",
-    searchText: "#00000f",
+    input: "#ffffff",
+    inputText: "#00000f",
+    inputBorder: "#00000f",
     card: "#ffffff",
     cardBorder: "#00000f",
     cardHoverShadow:
@@ -19,6 +20,12 @@ const theme: DefaultTheme = {
     prevNextButtons: "#6200ee",
     prevNextButtonsHoverColour: lighten(0.1, "#6200ee"),
     addRecipeButtonHoverColour: darken(0.3, "#757575"),
+    addIngredientButtonHoverColourRed: darken(0.1, "#ff0000"),
+    addIngredientButtonHoverColourGreen: darken(0.1, "#008000"),
+    saveButton: "#6200ee",
+    saveButtonHover: lighten(0.1, "#6200ee"),
+    saveButtonClick: lighten(0.3, "#6200ee"),
+    saveButtonText: "#ffffff",
   },
 };
 

@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Textbox = styled.input`
-  background-color: ${({ theme }) => theme.colours.searchInput};
-  color: ${({ theme }) => theme.colours.searchText};
+  background-color: ${({ theme }) => theme.colours.input};
+  color: ${({ theme }) => theme.colours.inputText};
   height: 50%;
   width: 100%;
   text-indent: 10px;
