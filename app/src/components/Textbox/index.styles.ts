@@ -9,6 +9,11 @@ export const Inputbox = styled.input`
   outline: none;
   font-size: 24px;
   border-bottom: 2px solid ${({ theme }) => theme.colours.inputBorder};
+
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 `;
 
 export const InputContainer = styled.div`

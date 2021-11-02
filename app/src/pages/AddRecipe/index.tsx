@@ -77,6 +77,7 @@ const AddRecipe: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
         <Textbox
           value={form.name}
           onChange={(text) => setForm({ ...form, name: text })}
+          type="text"
         />
         <div />
         <TitleContainer>
@@ -85,6 +86,7 @@ const AddRecipe: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
         <Textbox
           value={form.calories}
           onChange={(text) => setForm({ ...form, calories: text })}
+          type="number"
         />
         <div />
         <TitleContainer>
@@ -93,6 +95,7 @@ const AddRecipe: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
         <Textbox
           value={form.servings}
           onChange={(text) => setForm({ ...form, servings: text })}
+          type="number"
         />
         <div />
         {form.ingredients.map((ingredient, i) => {
@@ -108,6 +111,7 @@ const AddRecipe: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
                   form.ingredients[i] = text;
                   setForm({ ...form });
                 }}
+                type="text"
               />
               <ButtonContainer>
                 <IngredientButton
@@ -129,6 +133,7 @@ const AddRecipe: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
         <Textbox
           value={form.image}
           onChange={(text) => setForm({ ...form, image: text })}
+          type="text"
         />
         <div />
         <div />

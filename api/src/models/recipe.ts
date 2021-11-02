@@ -2,15 +2,15 @@ import mongoose, { Document } from "mongoose";
 
 interface Recipe extends Document {
   id: number;
-  name: string;
+  label: string;
   calories: number;
-  ingredients: string[];
-  servings: number;
+  ingredientLines: string[];
+  yield: number;
   image: string;
 }
 
 const recipeSchema = new mongoose.Schema({
-  name: {
+  label: {
     type: String,
     required: true,
   },
@@ -18,11 +18,11 @@ const recipeSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  ingredients: {
+  ingredientLines: {
     type: [String],
     required: true,
   },
-  servings: {
+  yield: {
     type: Number,
     required: true,
   },

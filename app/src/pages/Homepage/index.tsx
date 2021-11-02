@@ -28,7 +28,7 @@ interface GetRecipeResults {
         label: string;
         image: string;
         calories: number;
-        ingredients: {}[];
+        ingredientLines: string[];
         url: string;
         yield: number;
       };
@@ -44,14 +44,11 @@ interface Props {
 const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
   const [{ data, loading, error }, refetch] = useAxios<GetRecipeResults>(
     {
-      url: "https://edamam-recipe-search.p.rapidapi.com/search",
+      url: "http://localhost:8080/recipes",
       params: {
-        q: "",
+        search: "",
         to: 12,
-      },
-      headers: {
-        "x-rapidapi-key": process.env.REACT_APP_API_KEY,
-        "x-rapidapi-host": "edamam-recipe-search.p.rapidapi.com",
+        from: 0,
       },
     },
     { manual: true }
@@ -64,7 +61,7 @@ const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
     if (searchText !== "") {
       refetch({
         params: {
-          q: searchText,
+          search: searchText,
           to: 12 * resultsPage,
           from: 12 * (resultsPage - 1),
         },
@@ -79,8 +76,9 @@ const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
     setResultsPage(1);
     refetch({
       params: {
-        q: searchText,
+        search: searchText,
         to: 12,
+        from: 0,
       },
     });
   };
@@ -139,7 +137,7 @@ const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
                 calories={Math.round(
                   entry.recipe.calories / entry.recipe.yield
                 )}
-                ingredients={entry.recipe.ingredients.length}
+                ingredients={entry.recipe.ingredientLines.length}
                 serves={entry.recipe.yield}
                 url={entry.recipe.url}
               />
