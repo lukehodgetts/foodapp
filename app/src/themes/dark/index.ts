@@ -25,6 +25,8 @@ const theme: DefaultTheme = {
     saveButtonHover: lighten(0.1, "#1f1f1f"),
     saveButtonClick: lighten(0.4, "#1f1f1f"),
     saveButtonText: "#ffffff",
+    loadingColour: "#1f1f1f",
+    loadingColourAnimated: lighten(0.3, "#1f1f1f")
   },
 };
 

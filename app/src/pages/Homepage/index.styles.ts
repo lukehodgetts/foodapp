@@ -24,8 +24,8 @@ export const Loading = styled.div`
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  background-color: #9880ff;
-  color: #9880ff;
+  background-color: ${({ theme }) => theme.colours.loadingColour};
+  color: ${({ theme }) => theme.colours.loadingColour};
   animation: dotFlashing 1s infinite linear alternate;
   animation-delay: 0.5s;
 
@@ -42,8 +42,8 @@ export const Loading = styled.div`
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    background-color: #9880ff;
-    color: #9880ff;
+    background-color: ${({ theme }) => theme.colours.loadingColour};
+    color: ${({ theme }) => theme.colours.loadingColour};
     animation: dotFlashing 1s infinite alternate;
     animation-delay: 0s;
   }
@@ -53,19 +53,19 @@ export const Loading = styled.div`
     width: 10px;
     height: 10px;
     border-radius: 5px;
-    background-color: #9880ff;
-    color: #9880ff;
+    background-color: ${({ theme }) => theme.colours.loadingColour};
+    color: ${({ theme }) => theme.colours.loadingColour};
     animation: dotFlashing 1s infinite alternate;
     animation-delay: 1s;
   }
 
   @keyframes dotFlashing {
     0% {
-      background-color: #9880ff;
+      background-color: ${({ theme }) => theme.colours.loadingColour};
     }
     50%,
     100% {
-      background-color: #ebe6ff;
+      background-color: ${({ theme }) => theme.colours.loadingColourAnimated};
     }
   }
 `;

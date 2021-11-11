@@ -31,8 +31,6 @@ router.get("/", async (req, res) => {
       ? 0
       : parseInt(req.query.from) - recipes.length;
 
-  console.log(req.query);
-
   const data = await axios.get(
     "https://edamam-recipe-search.p.rapidapi.com/search",
     {
@@ -54,7 +52,6 @@ router.get("/", async (req, res) => {
     return { recipe };
   });
 
-  console.log(recipes);
   res.json({ ...data.data, hits: [...formattedRecipes, ...data.data.hits] });
 });
 

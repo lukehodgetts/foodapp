@@ -1,12 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface GridProps {
-    gridRowStart?: any;
-    gridRowEnd?: any;
-    gridColumnStart?: any;
-    gridColumnEnd?: any;
-    gridArea?: any;
-  }
+  gridRowStart?: any;
+  gridRowEnd?: any;
+  gridColumnStart?: any;
+  gridColumnEnd?: any;
+  gridArea?: any;
+}
 
 export const Grid = styled.div<GridProps>`
   grid-row-start: ${({ gridRowStart }) => gridRowStart};
@@ -27,4 +27,6 @@ export const Container = styled.div`
 
   height: 100%;
   background-color: ${({ theme }) => theme.colours.background};
+
+  transition: all 0.2s;
 `;

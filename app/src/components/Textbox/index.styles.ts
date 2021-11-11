@@ -14,6 +14,7 @@ export const Inputbox = styled.input`
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
+  transition: all 0.2s;
 `;
 
 export const InputContainer = styled.div`

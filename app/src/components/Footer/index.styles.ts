@@ -6,6 +6,7 @@ export const Container = styled.div`
   grid-template-areas: ". pagenum signature";
 
   background-color: ${({ theme }) => theme.colours.footer};
+  transition: all 0.2s;
   grid-area: footer;
 `;
 

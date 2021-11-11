@@ -11,6 +11,7 @@ export const Textbox = styled.input`
   border-radius: 5px;
   outline: none;
   font-size: 24px;
+  transition: all 0.2s;
 `;
 
 export const SearchContainer = styled.div`

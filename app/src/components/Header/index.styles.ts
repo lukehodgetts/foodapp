@@ -6,6 +6,7 @@ export const Container = styled.div`
   grid-template-areas: "title search themeswitch";
   background-color: ${({ theme }) => theme.colours.header};
   grid-area: header;
+  transition: all 0.2s;
 `;
 
 export const ThemeSwitch = styled.div`
@@ -27,6 +28,7 @@ export const Title = styled.h1`
   color: ${({ theme }) => theme.colours.headerText};
   margin: 0px;
 
+  transition: all 0.2s;
   :hover {
     cursor: pointer;
     text-decoration: underline;

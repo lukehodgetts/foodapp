@@ -25,6 +25,8 @@ declare module "styled-components" {
       saveButtonHover: string;
       saveButtonClick: string;
       saveButtonText: string;
+      loadingColour: string;
+      loadingColourAnimated: string;
     };
   }
 }

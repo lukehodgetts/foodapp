@@ -14,6 +14,7 @@ export const RecipeContainer = styled(Grid)`
 
 export const Title = styled.div`
   color: ${({ theme }) => theme.colours.bodyText};
+  transition: all 0.2s;
 
   font-size: max;
 `;
@@ -36,7 +37,7 @@ interface ButtonProps {
 
 export const IngredientButton = styled(FontAwesomeIcon)<ButtonProps>`
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s;
 
   :hover {
     color: ${({ theme, isLastIngredient }) =>
@@ -56,7 +57,7 @@ export const SaveButton = styled.button`
   border: 0px solid;
   border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s;
   font-size: 24px;
 
   background-color: ${({ theme }) => theme.colours.saveButton};
