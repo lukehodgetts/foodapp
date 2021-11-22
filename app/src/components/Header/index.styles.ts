@@ -1,12 +1,20 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 33.33%);
-  grid-template-areas: "title search themeswitch";
+  grid-template-areas: "title search subgrid";
   background-color: ${({ theme }) => theme.colours.header};
   grid-area: header;
   transition: all 0.2s;
+`;
+
+export const SubGrid = styled.div`
+  display: grid;
+  grid-area: subgrid;
+  grid-template-areas: "viewswitch themeswitch";
+  grid-template-columns: repeat(2, 50%);
 `;
 
 export const ThemeSwitch = styled.div`
@@ -14,6 +22,14 @@ export const ThemeSwitch = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+`;
+
+export const ViewSwitch = styled.div`
+  grid-area: viewswitch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 `;
 
 export const TitleContainer = styled.div`
@@ -34,3 +50,9 @@ export const Title = styled.h1`
     text-decoration: underline;
   }
 `;
+
+export const LargeView = styled(FontAwesomeIcon)``;
+
+export const TileView = styled(FontAwesomeIcon)``;
+
+export const ListView = styled(FontAwesomeIcon)``;

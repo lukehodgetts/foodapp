@@ -1,7 +1,18 @@
 import { Switch } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import { faThLarge, faTh, faList } from "@fortawesome/free-solid-svg-icons";
 
-import { Container, ThemeSwitch, Title, TitleContainer } from "./index.styles";
+import {
+  Container,
+  SubGrid,
+  ViewSwitch,
+  ThemeSwitch,
+  Title,
+  TitleContainer,
+  LargeView,
+  TileView,
+  ListView,
+} from "./index.styles";
 import Search from "../Search";
 
 type BaseProps = {
@@ -52,14 +63,21 @@ const Header: React.FC<Props> = (props) => {
           onAddButtonPress={props.onAddButtonPress}
         />
       )}
-      <ThemeSwitch>
-        <Switch
-          onChange={(e, checked) =>
-            props.onThemeToggle(checked ? "light" : "dark")
-          }
-          checked={props.selectedTheme === "light"}
-        />
-      </ThemeSwitch>
+      <SubGrid>
+        <ViewSwitch>
+          <LargeView icon={faThLarge} />
+          <TileView icon={faTh}/>
+          <ListView icon={faList}/>
+        </ViewSwitch>
+        <ThemeSwitch>
+          <Switch
+            onChange={(e, checked) =>
+              props.onThemeToggle(checked ? "light" : "dark")
+            }
+            checked={props.selectedTheme === "light"}
+          />
+        </ThemeSwitch>
+      </SubGrid>
     </Container>
   );
 };
