@@ -1,10 +1,16 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Grid } from "../../app.styles";
+import { View } from "../../types/view";
 
-export const MainContent = styled(Grid)`
+interface ViewProps {
+  view: View;
+}
+
+export const MainContent = styled(Grid)<ViewProps>`
   display: grid;
-  grid-template-columns: repeat(6, 16.6%);
+  align-items: center;
+  grid-template-columns: ${({view}) => view === "grid" ? "repeat(6, 16.6%)" : "repeat(8, 12.5%)"};
   grid-area: main;
 `;
 

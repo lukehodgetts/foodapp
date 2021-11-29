@@ -1,5 +1,17 @@
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { SearchContainer, Textbox, AddButton } from "./index.styles";
+import {
+  faEdit,
+  faThLarge,
+  faTh,
+  faList,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  SearchContainer,
+  Textbox,
+  ViewButton,
+  AddRecipeButton,
+  ButtonContainer,
+} from "./index.styles";
+import { View } from "../../types/view";
 
 interface Props {
   placeholder: string;
@@ -7,6 +19,8 @@ interface Props {
   inputText: string;
   onChange: (text: string) => void;
   onAddButtonPress: () => void;
+  onViewButtonPress: (view: View) => void;
+  view: View;
 }
 
 const Search: React.FC<Props> = ({
@@ -15,6 +29,8 @@ const Search: React.FC<Props> = ({
   inputText,
   onChange,
   onAddButtonPress,
+  onViewButtonPress,
+  view,
 }) => {
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && onEnterPress && inputText !== "") {
@@ -29,8 +45,18 @@ const Search: React.FC<Props> = ({
         onKeyPress={onKeyPress}
         value={inputText}
         onChange={(e) => onChange(e.target.value)}
+        maxLength={30}
       />
-      <AddButton icon={faEdit} onClick={onAddButtonPress} />
+      <ButtonContainer>
+        <ViewButton
+          icon={faThLarge}
+          onClick={() => onViewButtonPress("grid")}
+          isSelected={view === "grid"}
+        />
+        <ViewButton icon={faTh} onClick={() => onViewButtonPress("tile")} isSelected={view === "tile"}/>
+        <ViewButton icon={faList} onClick={() => onViewButtonPress("list")} isSelected={view === "list"}/>
+        <AddRecipeButton icon={faEdit} onClick={onAddButtonPress} />
+      </ButtonContainer>
     </SearchContainer>
   );
 };

@@ -24,14 +24,6 @@ export const ThemeSwitch = styled.div`
   align-items: center;
 `;
 
-export const ViewSwitch = styled.div`
-  grid-area: viewswitch;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-`;
-
 export const TitleContainer = styled.div`
   grid-area: title;
   display: flex;
@@ -50,9 +42,3 @@ export const Title = styled.h1`
     text-decoration: underline;
   }
 `;
-
-export const LargeView = styled(FontAwesomeIcon)``;
-
-export const TileView = styled(FontAwesomeIcon)``;
-
-export const ListView = styled(FontAwesomeIcon)``;

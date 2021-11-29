@@ -18,7 +18,7 @@ const theme: DefaultTheme = {
     cardHoverColour: lighten(0.1, "#202020"),
     prevNextButtons: "#ffffff",
     prevNextButtonsHoverColour: darken(0.5, "#ffffff"),
-    addRecipeButtonHoverColour: lighten(0.1, "#757575"),
+    addRecipeButtonHoverColour: lighten(0.5, "#757575"),
     addIngredientButtonHoverColourRed: lighten(0.1, "#ff0000"),
     addIngredientButtonHoverColourGreen: lighten(0.1, "#008000"),
     saveButton: "#1f1f1f",

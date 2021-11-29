@@ -9,7 +9,7 @@ interface Props {
   serves: number;
 }
 
-const Card: React.FC<Props> = ({
+const GridCard: React.FC<Props> = ({
   name,
   image,
   url,
@@ -17,12 +17,8 @@ const Card: React.FC<Props> = ({
   ingredients,
   serves,
 }) => {
-  const onClick = () => {
-    window.open(url);
-  };
-
   return (
-    <Body onClick={onClick}>
+    <Body onClick={() => window.open(url)}>
       <Image src={image} />
       <Details>
         <Title>{name}</Title>
@@ -34,4 +30,4 @@ const Card: React.FC<Props> = ({
   );
 };
 
-export default Card;
+export default GridCard;

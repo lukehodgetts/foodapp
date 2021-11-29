@@ -1,19 +1,15 @@
 import { Switch } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { faThLarge, faTh, faList } from "@fortawesome/free-solid-svg-icons";
 
 import {
   Container,
   SubGrid,
-  ViewSwitch,
   ThemeSwitch,
   Title,
   TitleContainer,
-  LargeView,
-  TileView,
-  ListView,
 } from "./index.styles";
 import Search from "../Search";
+import { View } from "../../types/view";
 
 type BaseProps = {
   onThemeToggle: (theme: "light" | "dark") => void;
@@ -32,6 +28,8 @@ type VisibleProps = BaseProps & {
   searchText: string;
   onSearchChange: (text: string) => void;
   onAddButtonPress: () => void;
+  onViewButtonPress: (string: View) => void;
+  view: View
 };
 
 type Props = HiddenProps | VisibleProps;
@@ -61,14 +59,11 @@ const Header: React.FC<Props> = (props) => {
           inputText={props.searchText}
           onChange={props.onSearchChange}
           onAddButtonPress={props.onAddButtonPress}
+          onViewButtonPress={props.onViewButtonPress}
+          view={props.view}
         />
       )}
       <SubGrid>
-        <ViewSwitch>
-          <LargeView icon={faThLarge} />
-          <TileView icon={faTh}/>
-          <ListView icon={faList}/>
-        </ViewSwitch>
         <ThemeSwitch>
           <Switch
             onChange={(e, checked) =>

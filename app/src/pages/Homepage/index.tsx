@@ -17,9 +17,11 @@ import {
 } from "./index.styles";
 
 import Header from "../../components/Header";
-import Card from "../../components/Card";
+import GridCard from "../../components/GridCard";
+import TileCard from "../../components/TileCard";
 import Footer from "../../components/Footer";
 import { Theme } from "../../hooks/useTheme";
+import { View } from "../../types/view";
 
 interface GetRecipeResults {
   hits: [
@@ -56,19 +58,25 @@ const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
 
   const [searchText, setSearchText] = useState("");
   const [resultsPage, setResultsPage] = useState(1);
+  const [view, setView] = useState<View>("grid");
+
+  const viewType = {
+    grid: 12,
+    tile: 24,
+    list: 12,
+  };
 
   useEffect(() => {
     if (searchText !== "") {
       refetch({
         params: {
           search: searchText,
-          to: 12 * resultsPage,
-          from: 12 * (resultsPage - 1),
+          to: viewType[view] * resultsPage,
+          from: viewType[view] * (resultsPage - 1),
         },
       });
-      console.log(resultsPage);
     }
-  }, [resultsPage]);
+  }, [resultsPage, view]);
 
   let history = useHistory();
 
@@ -77,7 +85,7 @@ const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
     refetch({
       params: {
         search: searchText,
-        to: 12,
+        to: viewType[view],
         from: 0,
       },
     });
@@ -106,6 +114,8 @@ const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
         onTitleClick={onTitleClick}
         onAddButtonPress={() => history.push("/addrecipe")}
         hidden={false}
+        onViewButtonPress={setView}
+        view={view}
       />
       {error && <h1>error</h1>}
       {loading && (
@@ -129,19 +139,27 @@ const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
           )}
         </FlexBox>
         {data && !loading && (
-          <MainContent>
-            {data.hits.map((entry) => (
-              <Card
-                name={entry.recipe.label}
-                image={entry.recipe.image}
-                calories={Math.round(
-                  entry.recipe.calories / entry.recipe.yield
-                )}
-                ingredients={entry.recipe.ingredientLines.length}
-                serves={entry.recipe.yield}
-                url={entry.recipe.url}
-              />
-            ))}
+          <MainContent view={view}>
+            {view === "grid"
+              ? data.hits.map((entry) => (
+                  <GridCard
+                    name={entry.recipe.label}
+                    image={entry.recipe.image}
+                    calories={Math.round(
+                      entry.recipe.calories / entry.recipe.yield
+                    )}
+                    ingredients={entry.recipe.ingredientLines.length}
+                    serves={entry.recipe.yield}
+                    url={entry.recipe.url}
+                  />
+                ))
+              : data.hits.map((entry) => (
+                  <TileCard
+                    name={entry.recipe.label}
+                    image={entry.recipe.image}
+                    url={entry.recipe.url}
+                  />
+                ))}
           </MainContent>
         )}
         {data && (
