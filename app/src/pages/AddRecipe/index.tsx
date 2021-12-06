@@ -33,7 +33,10 @@ const defaultState = {
 
 const AddRecipe: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
   let history = useHistory();
-  const [form, setForm] = useState(defaultState);
+  const [form, setForm] = useState({
+    ...defaultState,
+    ingredients: [...defaultState.ingredients],
+  });
 
   const [_, executePost] = useAxios(
     {

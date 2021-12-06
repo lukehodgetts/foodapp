@@ -19,6 +19,7 @@ import {
 import Header from "../../components/Header";
 import GridCard from "../../components/GridCard";
 import TileCard from "../../components/TileCard";
+import ListItem from "../../components/ListItem";
 import Footer from "../../components/Footer";
 import { Theme } from "../../hooks/useTheme";
 import { View } from "../../types/view";
@@ -63,7 +64,7 @@ const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
   const viewType = {
     grid: 12,
     tile: 24,
-    list: 12,
+    list: 25,
   };
 
   useEffect(() => {
@@ -130,7 +131,7 @@ const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
       )}
       <>
         <FlexBox gridArea="prev">
-          {resultsPage !== 1 && (
+          {resultsPage !== 1 && view !== "list" && (
             <PrevButton
               icon={faArrowAltCircleLeft}
               onClick={onPrevPage}
@@ -140,29 +141,34 @@ const Homepage: React.FC<Props> = ({ selectedTheme, changeTheme }) => {
         </FlexBox>
         {data && !loading && (
           <MainContent view={view}>
-            {view === "grid"
-              ? data.hits.map((entry) => (
-                  <GridCard
-                    name={entry.recipe.label}
-                    image={entry.recipe.image}
-                    calories={Math.round(
-                      entry.recipe.calories / entry.recipe.yield
-                    )}
-                    ingredients={entry.recipe.ingredientLines.length}
-                    serves={entry.recipe.yield}
-                    url={entry.recipe.url}
-                  />
-                ))
-              : data.hits.map((entry) => (
+            {(view === "grid" &&
+              data.hits.map((entry) => (
+                <GridCard
+                  name={entry.recipe.label}
+                  image={entry.recipe.image}
+                  calories={Math.round(
+                    entry.recipe.calories / entry.recipe.yield
+                  )}
+                  ingredients={entry.recipe.ingredientLines.length}
+                  serves={entry.recipe.yield}
+                  url={entry.recipe.url}
+                />
+              ))) ||
+              (view === "tile" &&
+                data.hits.map((entry) => (
                   <TileCard
                     name={entry.recipe.label}
                     image={entry.recipe.image}
                     url={entry.recipe.url}
                   />
-                ))}
+                ))) ||
+              (view === "list" &&
+                data.hits.map((entry) => (
+                  <ListItem name={entry.recipe.label} url={entry.recipe.url} />
+                )))}
           </MainContent>
         )}
-        {data && (
+        {data && view !== "list" && (
           <FlexBox gridArea="next">
             <NextButton
               icon={faArrowAltCircleRight}

@@ -10,7 +10,10 @@ interface ViewProps {
 export const MainContent = styled(Grid)<ViewProps>`
   display: grid;
   align-items: center;
-  grid-template-columns: ${({view}) => view === "grid" ? "repeat(6, 16.6%)" : "repeat(8, 12.5%)"};
+  grid-template-columns: ${({ view }) =>
+    (view === "grid" && "repeat(6, 16.6%)") ||
+    (view === "tile" && "repeat(8, 12.5%)") ||
+    (view === "list" && "repeat(1, 100%)")};
   grid-area: main;
 `;
 

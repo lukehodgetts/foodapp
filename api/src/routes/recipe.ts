@@ -7,7 +7,6 @@ import {
 } from "express";
 import axios from "axios";
 import Recipe from "../models/recipe";
-import recipe from "../models/recipe";
 const router = Router();
 
 //get all
@@ -60,10 +59,10 @@ router.post("/", async (req, res) => {
   const { id, name, calories, ingredients, servings, image } = req.body;
 
   const recipe = new Recipe({
-    name,
+    label: name,
     calories,
-    servings,
-    ingredients,
+    yield: servings,
+    ingredientLines: ingredients,
     image,
   });
 
